@@ -103,6 +103,17 @@ if uploaded_file is not None:
     st.image(path_r, caption=f"右肩最大外転角 = {max_abd_r:.1f}°", use_column_width=True)
 
     with open(path_l, "rb") as f1:
-        st.download_button("左肩レポート画像をダウンロード", f1, file_name="left_report.png")
+        btn1 = st.download_button("左肩レポート画像をダウンロード", f1, file_name="left_report.png")
+    if btn1:
+        try:
+            os.remove(path_l)
+        except Exception as e:
+            st.warning(f"左肩画像の削除に失敗しました: {e}")
+
     with open(path_r, "rb") as f2:
-        st.download_button("右肩レポート画像をダウンロード", f2, file_name="right_report.png")
+        btn2 = st.download_button("右肩レポート画像をダウンロード", f2, file_name="right_report.png")
+    if btn2:
+        try:
+            os.remove(path_r)
+        except Exception as e:
+            st.warning(f"右肩画像の削除に失敗しました: {e}")
