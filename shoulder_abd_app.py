@@ -70,7 +70,7 @@ if uploaded_file is not None:
     ang_elev_r = np.array([calangle(v, horizontal) for v in vec_elev_r])
     max_elev_r = np.max(ang_elev_r)
 
-    def plot_stick(mid_head, l_shoul, r_shoul, elb, wri, side="L", max_abd=None, max_elev=None):
+    def plot_stick(mid_head, l_shoul, r_shoul, elb, wri, side="L"):
         fig, ax = plt.subplots(figsize=(6,6))
         ax.set_xlim(-300, 300)
         ax.set_ylim(-300, 300)
@@ -91,19 +91,12 @@ if uploaded_file is not None:
             ax.plot([r_shoul[0], elb[0]], [r_shoul[1], elb[1]], color='gray', linewidth=2, alpha=0.8)
         ax.plot([elb[0], wri[0]], [elb[1], wri[1]], color='gray', linewidth=2, alpha=0.8)
 
-        if max_abd is not None and max_elev is not None:
-            ax.text(-280, 230, f"最大肩外転 = {max_abd:.1f}°", fontsize=14, color='black')
-            ax.text(-280, 200, f"最大肩挙上 = {max_elev:.1f}°（肩甲ライン傾き）", fontsize=14, color='black')
-            ax.text(-280, 170, "※ 挙上角：左右肩の傾きから推定", fontsize=12, color='gray')
-
         return fig
 
     fig_l = plot_stick(mid_head[tmg_abd_l] - mid_head[0], l_shoul[tmg_abd_l] - mid_head[0],
-                       r_shoul[tmg_abd_l] - mid_head[0], l_elb[tmg_abd_l] - mid_head[0], l_wri[tmg_abd_l] - mid_head[0],
-                       side="L", max_abd=max_abd_l, max_elev=max_elev_l)
+                       r_shoul[tmg_abd_l] - mid_head[0], l_elb[tmg_abd_l] - mid_head[0], l_wri[tmg_abd_l] - mid_head[0], side="L")
     fig_r = plot_stick(mid_head[tmg_abd_r] - mid_head[0], l_shoul[tmg_abd_r] - mid_head[0],
-                       r_shoul[tmg_abd_r] - mid_head[0], r_elb[tmg_abd_r] - mid_head[0], r_wri[tmg_abd_r] - mid_head[0],
-                       side="R", max_abd=max_abd_r, max_elev=max_elev_r)
+                       r_shoul[tmg_abd_r] - mid_head[0], r_elb[tmg_abd_r] - mid_head[0], r_wri[tmg_abd_r] - mid_head[0], side="R")
 
     tmpdir = tempfile.gettempdir()
     path_l = os.path.join(tmpdir, "left_report.png")
@@ -111,8 +104,15 @@ if uploaded_file is not None:
     fig_l.savefig(path_l)
     fig_r.savefig(path_r)
 
-    st.image(path_l, caption="左肩レポート", use_column_width=True)
-    st.image(path_r, caption="右肩レポート", use_column_width=True)
+    st.image(path_l, caption="左肩スティックピクチャ", use_column_width=True)
+    st.markdown(f"### 左肩 可動域まとめ")
+    st.markdown(f"- 最大肩外転角：**{max_abd_l:.1f}°**")
+    st.markdown(f"- 最大肩挙上角：**{max_elev_l:.1f}°**（肩甲ラインの傾き）")
+
+    st.image(path_r, caption="右肩スティックピクチャ", use_column_width=True)
+    st.markdown(f"### 右肩 可動域まとめ")
+    st.markdown(f"- 最大肩外転角：**{max_abd_r:.1f}°**")
+    st.markdown(f"- 最大肩挙上角：**{max_elev_r:.1f}°**（肩甲ラインの傾き）")
 
     with open(path_l, "rb") as f1:
         btn1 = st.download_button("左肩レポート画像をダウンロード", f1, file_name="left_report.png")
