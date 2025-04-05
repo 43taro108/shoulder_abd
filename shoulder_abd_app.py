@@ -87,9 +87,9 @@ if uploaded_file is not None:
         return fig
 
     # 左右描画
-    fig_l = plot_stick("左肩最大外転", mid_head[tmg_abd_l] - mid_head[0], l_shoul[tmg_abd_l] - mid_head[0],
+    fig_l = plot_stick(mid_head[tmg_abd_l] - mid_head[0], l_shoul[tmg_abd_l] - mid_head[0],
                        r_shoul[tmg_abd_l] - mid_head[0], l_elb[tmg_abd_l] - mid_head[0], l_wri[tmg_abd_l] - mid_head[0], side="L")
-    fig_r = plot_stick("右肩最大外転", mid_head[tmg_abd_r] - mid_head[0], l_shoul[tmg_abd_r] - mid_head[0],
+    fig_r = plot_stick(mid_head[tmg_abd_r] - mid_head[0], l_shoul[tmg_abd_r] - mid_head[0],
                        r_shoul[tmg_abd_r] - mid_head[0], r_elb[tmg_abd_r] - mid_head[0], r_wri[tmg_abd_r] - mid_head[0], side="R")
 
     # 保存＆表示
