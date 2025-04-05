@@ -74,7 +74,6 @@ if uploaded_file is not None:
         fig, ax = plt.subplots(figsize=(6,6))
         ax.set_xlim(-300, 300)
         ax.set_ylim(-300, 300)
-        ax.set_title(title)
         ax.set_xlabel("X (px)")
         ax.set_ylabel("Y (px)")
         ax.grid(alpha=0.2)
