@@ -107,12 +107,12 @@ if uploaded_file is not None:
     st.image(path_l, caption="左肩スティックピクチャ", use_column_width=True)
     st.markdown(f"### 左肩 可動域まとめ")
     st.markdown(f"- 最大肩外転角：**{max_abd_l:.1f}°**")
-    st.markdown(f"- 最大肩挙上角：**{max_elev_l:.1f}°**（肩甲ラインの傾き）")
+    st.markdown(f"- 最大肩挙上角：**{max_elev_l:.1f}°**")
 
     st.image(path_r, caption="右肩スティックピクチャ", use_column_width=True)
     st.markdown(f"### 右肩 可動域まとめ")
     st.markdown(f"- 最大肩外転角：**{max_abd_r:.1f}°**")
-    st.markdown(f"- 最大肩挙上角：**{max_elev_r:.1f}°**（肩甲ラインの傾き）")
+    st.markdown(f"- 最大肩挙上角：**{max_elev_r:.1f}°**")
 
     with open(path_l, "rb") as f1:
         btn1 = st.download_button("左肩レポート画像をダウンロード", f1, file_name="left_report.png")
